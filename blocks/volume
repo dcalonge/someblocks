@@ -5,5 +5,5 @@ vol=$(pactl list sinks | grep 'Volume:' | head -n 1 | awk '{print $5}' | sed 's/
 if [ $(pactl list sinks | grep "Mute:" | awk '{print $2}') = "yes" ]; then
   echo -n "ﱝ"
 else
-  echo -n "$(/home/daniel/repos/someblocks/blocks/percentage $vol 󰕿 奔 墳 󱄠) $vol%"
+  echo -n "$(/home/daniel/mis_repos/someblocks/blocks/percentage $vol 󰕿 奔 墳 󱄠) $vol%"
 fi

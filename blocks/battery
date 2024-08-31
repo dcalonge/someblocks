@@ -10,10 +10,10 @@ state=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 |
   grep state |
   sed 's/ *state: *//')
 
-if [ $state == "charging" -o $state == "fully-charged" ]; then
-  echo -n " "
+if [ $state = "charging" -o $state = "fully-charged" ]; then
+  echo -n "󱐋 "
 else
-  echo -n "$(/home/daniel/repos/someblocks/blocks/percentage $bat 󰁻 󰁾 󰂀 󰁹) "
+  echo -n "$(/home/daniel/mis_repos/someblocks/blocks/percentage $bat 󰁻 󰁾 󰂀 󰁹) "
 fi
 
 echo -n "$bat"
