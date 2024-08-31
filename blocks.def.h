@@ -8,5 +8,5 @@ static const Block blocks[] = {
 };
 
 // Sets delimeter between status commands. NULL character ('\0') means no delimeter.
-static char delim[] = "  ";
-static unsigned int delimLen = 5;
+static char delim[] = '\0';
+static unsigned int delimLen = 3;
