@@ -2,4 +2,4 @@
 
 br=$(brightnessctl -m | grep -oP ',[0-9]+,(\d{1,3}%),' | cut -d '%' -f1 | cut -d ',' -f3)
 
-echo -n "$(/home/daniel/mis_repos/someblocks/blocks/percentage $br    ) $br%"
+echo -n "$(/home/daniel/mis_repos/someblocks/blocks/percentage $br  󰃝  )"

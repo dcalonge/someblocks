@@ -13,7 +13,7 @@ state=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1 |
 if [ $state = "charging" -o $state = "fully-charged" ]; then
   echo -n "󱐋 "
 else
-  echo -n "$(/home/daniel/mis_repos/someblocks/blocks/percentage $bat 󰁻 󰁾 󰂀 󰁹) "
+  echo -n "$(/home/daniel/mis_repos/someblocks/blocks/percentage_battery $bat 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹) "
 fi
 
 echo -n "$bat"

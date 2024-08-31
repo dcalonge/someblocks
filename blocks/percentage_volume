@@ -1,0 +1,11 @@
+#!/bin/sh
+
+current=$(echo $1 | sed 's/%//')
+
+if [ $current -le 33 ]; then
+  echo -n $2
+elif [ $current -le 67 ]; then
+  echo -n $3
+else
+  echo -n $4
+fi
