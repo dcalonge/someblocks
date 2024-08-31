@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if grep -q 'wlan0' /proc/net/wireless; then
+  strength=$(awk '/wlan0/ { print int(($3) * 100 / 70) }' /proc/net/wireless)
+  echo -n "$(/home/daniel/repos/someblocks/blocks/percentage $strength 󰤟 󰤢 󰤢 󰤨)"
+else
+  echo -n "󰤮"
+fi
