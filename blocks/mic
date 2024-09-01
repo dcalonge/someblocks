@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ $(pactl list sources | grep -q "Mute: yes" && echo "yes" || echo "no") = "no" ]; then
+  echo -n "   󰍬"
+else
+  echo -n ""
+fi
