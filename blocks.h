@@ -1,6 +1,6 @@
 static const Block blocks[] = {
 //   Icon    Command                          Update Interval     Update Signal
-    { "   ", "/home/daniel/scripts/checkup.sh",                 3660,               30 },
+    { "   ", "/home/daniel/mis_repos/someblocks/blocks/checkup.sh",                 3660,               30 },
     { "",    "/home/daniel/mis_repos/someblocks/blocks/mic",                               0,                15 },
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/volume",                               0,                10 },
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/brightness",                           0,                20 },
