@@ -6,7 +6,7 @@ static const Block blocks[] = {
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/brightness",                           0,                20 },
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/wifi",                              30,               25 },
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/battery",                              10,               0 },
-    { "  ",    "date '+%d/%m %H:%M'",        30,                0 },
+    { "  ",    "date '+%H:%M %d/%m '",        30,                0 },
 };
 
 // Sets delimeter between status commands. NULL character ('\0') means no delimeter.
