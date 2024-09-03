@@ -12,5 +12,5 @@ else
   else
     icon="󰕾"
   fi
-  echo -n "$icon" && dunstify -t 1000 -u low -i audio-volume-muted "Volume: $((vol))%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$vol -h string:hlcolor:"#eeeeee"
+  echo -n "   $icon" && dunstify -t 1000 -u low -i audio-volume-muted "Volume: $((vol))%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$vol -h string:hlcolor:"#eeeeee"
 fi
