@@ -1,11 +1,11 @@
 static const Block blocks[] = {
 //   Icon    Command                          Update Interval     Update Signal
-    { "", "blocks/checkup",                 3660,               30 },
-    { "",    "blocks/mic",                               0,                15 },
-    { "",    "blocks/volume",                               0,                10 },
-    { "   ",    "blocks/brightness",                           0,                20 },
-    { "   ",    "blocks/wifi",                              30,               25 },
-    { "   ",    "blocks/battery",                              10,               0 },
+    { "", "/home/daniel/mis_repos/someblocks/blocks/checkup",                 3660,               30 },
+    { "",    "/home/daniel/mis_repos/someblocks/blocks/mic",                               0,                15 },
+    { "",    "/home/daniel/mis_repos/someblocks/blocks/volume",                               0,                10 },
+    { "   ",    "/home/daniel/mis_repos/someblocks/blocks/brightness",                           0,                20 },
+    { "   ",    "/home/daniel/mis_repos/someblocks/blocks/wifi",                              30,               25 },
+    { "   ",    "/home/daniel/mis_repos/someblocks/blocks/battery",                              10,               0 },
     { "  ",    "date '+%H:%M %d/%m '",        30,                0 },
 };
 
