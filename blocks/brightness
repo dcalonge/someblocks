@@ -15,7 +15,7 @@ fi
 if [ "$brightness_percent" -le 25 ]; then
   icon=""
 elif [ "$brightness_percent" -le 50 ]; then
-  icon="󰃝"
+  icon="󰃝 "
 elif [ "$brightness_percent" -le 75 ]; then
   icon=""
 else

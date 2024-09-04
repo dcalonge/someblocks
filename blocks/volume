@@ -3,7 +3,7 @@
 vol=$(pactl list sinks | grep 'Volume:' | head -n 1 | awk '{print $5}' | sed 's/%//')
 
 if [ $(pactl list sinks | grep "Mute:" | awk '{print $2}') = "yes" ]; then
-  echo -n "  ﱝ" && dunstify -t 1000 -u low -i audio-volume-muted "Volume Muted" -h int:value:0 -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace
+  echo -n "  󰖁" && dunstify -t 1000 -u low -i audio-volume-muted "Volume Muted" -h int:value:0 -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace
 else
   if [ "$vol" -le 33 ]; then
     icon="󰕿"
