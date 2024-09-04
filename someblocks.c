@@ -36,8 +36,7 @@ int getstatus(char *str, char *last);
 void statusloop();
 void termhandler();
 void pstdout();
-void psomebar();
-static void (*writestatus) () = psomebar;
+static void (*writestatus) () = pstdout;
 
 #include "blocks.h"
 
@@ -45,8 +44,6 @@ static char statusbar[LENGTH(blocks)][CMDLENGTH] = {0};
 static char statusstr[2][STATUSLENGTH];
 static int statusContinue = 1;
 static int returnStatus = 0;
-static char somebarPath[128];
-static int somebarFd = -1;
 
 //opens process *cmd and stores output in *output
 void getcmd(const Block *block, char *output)
@@ -129,27 +126,6 @@ void pstdout()
 	fflush(stdout);
 }
 
-
-void psomebar()
-{
-	if (!getstatus(statusstr[0], statusstr[1]))//Only write out if text has changed.
-		return;
-	if (somebarFd < 0) {
-		somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
-		if (somebarFd < 0 && errno == ENOENT) {
-			// assume somebar is not ready yet
-			sleep(1);
-			somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
-		}
-		if (somebarFd < 0) {
-			perror("open");
-			return;
-		}
-	}
-	dprintf(somebarFd, "status %s\n", statusstr[0]);
-}
-
-
 void statusloop()
 {
 	setupsignals();
@@ -183,33 +159,17 @@ void termhandler()
 	statusContinue = 0;
 }
 
-void sigpipehandler()
-{
-	close(somebarFd);
-	somebarFd = -1;
-}
-
 int main(int argc, char** argv)
 {
 	for (int i = 0; i < argc; i++) {//Handle command line arguments
 		if (!strcmp("-d",argv[i]))
 			strncpy(delim, argv[++i], delimLen);
-		else if (!strcmp("-p",argv[i]))
-			writestatus = pstdout;
-		else if (!strcmp("-s",argv[i]))
-			strcpy(somebarPath, argv[++i]);
-	}
-
-	if (!strlen(somebarPath)) {
-		strcpy(somebarPath, getenv("XDG_RUNTIME_DIR"));
-		strcat(somebarPath, "/somebar-0");
 	}
 
 	delimLen = MIN(delimLen, strlen(delim));
 	delim[delimLen++] = '\0';
 	signal(SIGTERM, termhandler);
 	signal(SIGINT, termhandler);
-	signal(SIGPIPE, sigpipehandler);
 	statusloop();
 	return 0;
 }
