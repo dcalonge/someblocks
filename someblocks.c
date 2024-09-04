@@ -138,11 +138,6 @@ void termhandler()
 
 int main(int argc, char** argv)
 {
-	for (int i = 0; i < argc; i++) {//Handle command line arguments
-		if (!strcmp("-d",argv[i]))
-			strncpy(delim, argv[++i], delimLen);
-	}
-
 	delimLen = MIN(delimLen, strlen(delim));
 	delim[delimLen++] = '\0';
 	signal(SIGTERM, termhandler);
