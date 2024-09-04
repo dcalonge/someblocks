@@ -91,7 +91,6 @@ void setupsignals()
 		if (blocks[i].signal > 0)
 			sigaction(SIGMINUS+blocks[i].signal, &sa, NULL);
 	}
-
 }
 
 int getstatus(char *str, char *last)
