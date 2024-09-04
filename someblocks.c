@@ -6,10 +6,6 @@
 #include<fcntl.h>
 #include<errno.h>
 #include<signal.h>
-#ifdef __OpenBSD__
-#define SIGPLUS			SIGUSR1+1
-#define SIGMINUS		SIGUSR1-1
-#else
 #define SIGPLUS			SIGRTMIN
 #define SIGMINUS		SIGRTMIN
 #endif
