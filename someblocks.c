@@ -29,7 +29,6 @@ int getstatus(char *str, char *last);
 void statusloop();
 void termhandler();
 void pstdout();
-static void (*writestatus) () = pstdout;
 
 #include "blocks.h"
 
@@ -118,7 +117,7 @@ void statusloop()
 	getcmds(-1);
 	while (1) {
 		getcmds(i++);
-		writestatus();
+		pstdout();
 		if (!statusContinue)
 			break;
 		sleep(1.0);
@@ -128,7 +127,7 @@ void statusloop()
 void sighandler(int signum)
 {
 	getsigcmds(signum-SIGPLUS);
-	writestatus();
+	pstdout();
 }
 
 void termhandler()
