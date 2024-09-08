@@ -12,11 +12,11 @@ else
 fi
 
 # Determine the appropriate icon based on brightness percentage
-if [ "$brightness_percent" -le 25 ]; then
+if [ "$brightness_percent" -le 24 ]; then
   icon=""
-elif [ "$brightness_percent" -le 50 ]; then
+elif [ "$brightness_percent" -le 49 ]; then
   icon="󰃝 "
-elif [ "$brightness_percent" -le 75 ]; then
+elif [ "$brightness_percent" -le 74 ]; then
   icon=""
 else
   icon=""
