@@ -1,15 +1,12 @@
 #!/bin/sh
 
-# Get battery percentage and state
 battery_path="/org/freedesktop/UPower/devices/battery_BAT1"
 bat=$(upower -i "$battery_path" | awk '/percentage/ {gsub("%",""); print $2}')
 state=$(upower -i "$battery_path" | awk '/state/ {print $2}')
 
-# Define icons for different ranges of battery percentage
 charging_icons="󰢜 󰂆 󰂇 󰢝 󰂉 󰂉 󰢞 󰂊 󰂋 󰂅"
 discharging_icons="󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹"
 
-# Use charging icons if the battery is charging or fully charged, otherwise discharging icons
 if [ "$state" = "charging" ] || [ "$state" = "fully-charged" ]; then
   icons="$charging_icons"
 else
@@ -20,5 +17,4 @@ index=$(expr "$bat" / 10 + 1)
 
 icon=$(echo "$icons" | cut -d ' ' -f "$index")
 
-# Print the selected icon and battery percentage
 echo -n "$icon $bat%"
