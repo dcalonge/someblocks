@@ -2,26 +2,23 @@
 
 # Get battery percentage and state
 battery_path="/org/freedesktop/UPower/devices/battery_BAT1"
-bat=$(upower -i $battery_path | grep percentage | sed 's/ *percentage: *//g' | sed 's/%//')
-state=$(upower -i $battery_path | grep state | sed 's/ *state: *//')
+bat=$(upower -i "$battery_path" | awk '/percentage/ {gsub("%",""); print $2}')
+state=$(upower -i "$battery_path" | awk '/state/ {print $2}')
 
 # Define icons for different ranges of battery percentage
 charging_icons="󰢜 󰂆 󰂇 󰢝 󰂉 󰂉 󰢞 󰂊 󰂋 󰂅"
 discharging_icons="󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹"
 
-# Determine which set of icons to use
+# Use charging icons if the battery is charging or fully charged, otherwise discharging icons
 if [ "$state" = "charging" ] || [ "$state" = "fully-charged" ]; then
-  icons=$charging_icons
+  icons="$charging_icons"
 else
-  icons=$discharging_icons
+  icons="$discharging_icons"
 fi
 
-# Convert icons string to array-like handling
-icon_array=$(echo $icons | tr ' ' '\n')
+index=$(expr "$bat" / 10 + 1)
 
-# Calculate icon index based on battery percentage
-index=$((bat / 10))
-icon=$(echo "$icon_array" | sed -n "$((index + 1))p")
+icon=$(echo "$icons" | cut -d ' ' -f "$index")
 
 # Print the selected icon and battery percentage
 echo -n "$icon $bat%"
