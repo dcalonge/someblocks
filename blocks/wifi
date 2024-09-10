@@ -1,24 +1,19 @@
 #!/bin/sh
 
-# Check if 'wlan0' is present in /proc/net/wireless
-if grep -q 'wlan0' /proc/net/wireless; then
-  # Extract the signal strength and convert it to a percentage
-  strength=$(awk '/wlan0/ { print int(($3) * 100 / 70) }' /proc/net/wireless)
+strength=$(awk '/wlan0/ { print int(($3) * 100 / 70) }' /proc/net/wireless)
 
-  # Determine the icon based on the strength percentage
+if [ -n "$strength" ]; then
   if [ "$strength" -le 25 ]; then
-    icon="󰤟" # Low signal
+    icon="󰤟"
   elif [ "$strength" -le 50 ]; then
-    icon="󰤢" # Moderate signal
+    icon="󰤢"
   elif [ "$strength" -le 75 ]; then
-    icon="󰤥" # Good signal
+    icon="󰤥"
   else
-    icon="󰤨" # Excellent signal
+    icon="󰤨"
   fi
-
-  # Print the icon and strength percentage
-  echo -n "$icon"
 else
-  # If 'wlan0' is not found, print the no Wi-Fi icon
-  echo -n "󰤮"
+  icon="󰤮"
 fi
+
+echo -n "$icon"

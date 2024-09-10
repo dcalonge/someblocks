@@ -1,9 +1,12 @@
 #!/bin/sh
 
-vol=$(pactl list sinks | grep 'Volume:' | head -n 1 | awk '{print $5}' | sed 's/%//')
+vol_info=$(pactl list sinks)
+vol=$(echo "$vol_info" | grep 'Volume:' | head -n 1 | awk '{print $5}' | sed 's/%//')
+mute=$(echo "$vol_info" | grep "Mute:" | awk '{print $2}')
 
-if [ $(pactl list sinks | grep "Mute:" | awk '{print $2}') = "yes" ]; then
-  echo -n "  󰖁" && dunstify -t 1000 -u low -i audio-volume-muted "Volume Muted" -h int:value:0 -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace
+if [ "$mute" = "yes" ]; then
+  echo -n "  󰖁"
+  dunstify -t 1000 -u low -i audio-volume-muted "Volume Muted" -h int:value:0 -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace
 else
   if [ "$vol" -le 33 ]; then
     icon="󰕿"
@@ -12,5 +15,7 @@ else
   else
     icon="󰕾"
   fi
-  echo -n "  $icon" && dunstify -t 1000 -u low -i audio-volume-muted "Volume: $((vol))%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$vol -h string:hlcolor:"#eeeeee"
+
+  echo -n "  $icon"
+  dunstify -t 1000 -u low -i audio-volume-muted "Volume: $vol%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$vol -h string:hlcolor:"#eeeeee"
 fi

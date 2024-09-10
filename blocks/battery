@@ -1,8 +1,9 @@
 #!/bin/sh
 
 battery_path="/org/freedesktop/UPower/devices/battery_BAT1"
-bat=$(upower -i "$battery_path" | awk '/percentage/ {gsub("%",""); print $2}')
-state=$(upower -i "$battery_path" | awk '/state/ {print $2}')
+battery_info=$(upower -i "$battery_path")
+bat=$(echo "$battery_info" | awk '/percentage/ {gsub("%",""); print $2}')
+state=$(echo "$battery_info" | awk '/state/ {print $2}')
 
 charging_icons="󰢜 󰂆 󰂇 󰢝 󰂉 󰂉 󰢞 󰂊 󰂋 󰂅"
 discharging_icons="󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹"
