@@ -1,13 +1,18 @@
 #!/bin/sh
 
-# Verificar actualizaciones de paquetes Arch Linux
-arch_updates=$(checkupdates --nocolor | wc -l)
+TIMEOUT=5
 
-# Verificar actualizaciones de aplicaciones flatpak
-flatpak_updates=$(/usr/bin/flatpak remote-ls --columns=application -a --updates | wc -l)
+arch_updates=$(timeout $TIMEOUT checkupdates --nocolor 2>/dev/null | wc -l)
+if [ $? -ne 0 ]; then
+  arch_updates=0
+fi
+
+flatpak_updates=$(timeout $TIMEOUT /usr/bin/flatpak remote-ls --columns=application -a --updates 2>/dev/null | wc -l)
+if [ $? -ne 0 ]; then
+  flatpak_updates=0
+fi
 
 num_updates=$((arch_updates + flatpak_updates))
-
 if [ "$num_updates" -gt 0 ]; then
   echo -n "    $num_updates "
 fi
