@@ -1,17 +1,13 @@
 #!/bin/sh
 
-# Fetch current and maximum brightness
-current_brightness=$(brightnessctl get)
 max_brightness=$(brightnessctl max)
 
-# Calculate brightness percentage
 if [ "$max_brightness" -gt 0 ]; then
-  brightness_percent=$((current_brightness * 100 / max_brightness))
+  brightness_percent=$(($(brightnessctl get) * 100 / max_brightness))
 else
   brightness_percent=0
 fi
 
-# Determine the appropriate icon based on brightness percentage
 if [ "$brightness_percent" -le 24 ]; then
   icon=""
 elif [ "$brightness_percent" -le 49 ]; then
@@ -22,5 +18,4 @@ else
   icon=""
 fi
 
-# Output the icon (and percentage if desired)
 echo -n "$icon" && dunstify -t 1000 -u low -i audio-volume-muted "Brightness: $((brightness_percent))%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$brightness_percent -h string:hlcolor:"#eeeeee"
