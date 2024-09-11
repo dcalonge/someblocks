@@ -1,7 +1,6 @@
 #!/bin/sh
 
-battery_path="/org/freedesktop/UPower/devices/battery_BAT1"
-battery_info=$(upower -i "$battery_path")
+battery_info=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1)
 bat=$(echo "$battery_info" | awk '/percentage/ {gsub("%",""); print $2}')
 state=$(echo "$battery_info" | awk '/state/ {print $2}')
 
