@@ -4,8 +4,8 @@ battery_info=$(upower -i /org/freedesktop/UPower/devices/battery_BAT1)
 bat=$(echo "$battery_info" | awk '/percentage/ {gsub("%",""); print $2}')
 state=$(echo "$battery_info" | awk '/state/ {print $2}')
 
-charging_icons="󰢜 󰂆 󰂇 󰂈 󰢝 󰂉 󰢞 󰂊 󰂋 󰂅"
-discharging_icons="󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹"
+charging_icons="󰢟 󰢜 󰂆 󰂇 󰂈 󰢝 󰂉 󰢞 󰂊 󰂋 󰂅"
+discharging_icons="󰂎 󰁺 󰁻 󰁼 󰁽 󰁾 󰁿 󰂀 󰂁 󰂂 󰁹"
 
 if [ "$state" = "charging" ] || [ "$state" = "fully-charged" ]; then
   icons="$charging_icons"
