@@ -1,10 +1,9 @@
 #!/bin/sh
+vol_info=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+vol=$(echo "$vol_info" | awk '{print $2 * 100}')
+mute=$(echo "$vol_info" | awk '{print $3}')
 
-vol_info=$(pactl list sinks)
-vol=$(echo "$vol_info" | grep 'Volume:' | head -n 1 | awk '{print $5}' | sed 's/%//')
-mute=$(echo "$vol_info" | grep "Mute:" | awk '{print $2}')
-
-if [ "$mute" = "yes" ]; then
+if [ "$mute" = "[MUTED]" ]; then
   echo -n "  󰖁"
   dunstify -t 1000 -u low -i audio-volume-muted "Volume Muted" -h int:value:0 -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace
 else
