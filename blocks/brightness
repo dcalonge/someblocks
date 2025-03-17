@@ -9,13 +9,13 @@ else
 fi
 
 if [ "$brightness_percent" -le 24 ]; then
-  icon=""
+  icon="󰃞"
 elif [ "$brightness_percent" -le 49 ]; then
-  icon="󰃝 "
+  icon="󰃝"
 elif [ "$brightness_percent" -le 74 ]; then
-  icon=""
+  icon="󰃟"
 else
-  icon=""
+  icon="󰃠"
 fi
 
 echo -n "$icon" && dunstify -t 1000 -u low -i audio-volume-muted "Brightness: $((brightness_percent))%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$brightness_percent -h string:hlcolor:"#eeeeee"
