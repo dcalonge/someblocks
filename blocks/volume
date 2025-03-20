@@ -4,8 +4,7 @@ vol=$(echo "$vol_info" | awk '{print $2 * 100}')
 mute=$(echo "$vol_info" | awk '{print $3}')
 
 if [ "$mute" = "[MUTED]" ]; then
-  echo -n "  󰖁"
-  dunstify -t 1000 -u low -i audio-volume-muted "Volume Muted" -h int:value:0 -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace
+  echo -n "  󰖁" && notify-send " Volume Muted" -t 500 -u low -c "osd-text"
 else
   if [ "$vol" -le 33 ]; then
     icon="󰕿"
@@ -15,6 +14,5 @@ else
     icon="󰕾"
   fi
 
-  echo -n "  $icon"
-  dunstify -t 1000 -u low -i audio-volume-muted "Volume: $vol%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$vol -h string:hlcolor:"#eeeeee"
+  echo -n "  $icon" && notify-send " 󰕾" -t 500 -u low -h int:value:$vol -c "osd"
 fi

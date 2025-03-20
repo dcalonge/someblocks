@@ -18,4 +18,4 @@ else
   icon="󰃠"
 fi
 
-echo -n "$icon" && dunstify -t 1000 -u low -i audio-volume-muted "Brightness: $((brightness_percent))%" -h string:x-dunst-stack-tag:volume -h string:x-dunst-stack-mode:replace -h int:value:$brightness_percent -h string:hlcolor:"#eeeeee"
+echo -n "$icon" && notify-send " 󰃟" -t 1000 -u low -h int:value:$brightness_percent -c "osd"
