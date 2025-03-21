@@ -2,7 +2,7 @@
 
 TIMEOUT=10
 
-dnf_updates=$(timeout $TIMEOUT /usr/bin/dnf check-update -yq | grep -E 'x86_64|i686|noarch|aarch64' | awk '{print $1,$2}' | wc -l)
+arch_updates=$(timeout $TIMEOUT checkupdates --nocolor 2>/dev/null | wc -l)
 if [ $? -ne 0 ]; then
   arch_updates=0
 fi
@@ -12,7 +12,7 @@ if [ $? -ne 0 ]; then
   flatpak_updates=0
 fi
 
-num_updates=$((dnf_updates + flatpak_updates))
+num_updates=$((arch_updates + flatpak_updates))
 if [ "$num_updates" -gt 0 ]; then
   echo -n " 󰏕 $num_updates "
 fi
