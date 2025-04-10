@@ -4,7 +4,7 @@ static const Block blocks[] = {
     { "",    "/home/daniel/mis_repos/someblocks/blocks/mic",                               0,                15 },
     { "",    "/home/daniel/mis_repos/someblocks/blocks/volume",                               0,                10 },
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/brightness",                           0,                20 },
-    { "    ",    "/home/daniel/mis_repos/someblocks/blocks/wifi",                              5,               0 },
+    { "   ",    "/home/daniel/mis_repos/someblocks/blocks/wifi",                              5,               0 },
     { "   ",    "/home/daniel/mis_repos/someblocks/blocks/battery",                              5,               0 },
     { "  ",    "date '+%H:%M %d/%m '",        30,                0 },
 };
