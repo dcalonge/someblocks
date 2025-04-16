@@ -16,4 +16,12 @@ else
   icon="󰤮"
 fi
 
-echo -n "$icon"
+ssid=$(iwgetid -r)
+
+if [ -z "$ssid" ]; then
+  ssid="  no internet"
+else
+  ssid="  $ssid"
+fi
+
+echo -n "$icon$ssid"

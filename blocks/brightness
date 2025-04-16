@@ -18,4 +18,4 @@ else
   icon="󰃠"
 fi
 
-echo -n "$icon" && notify-send " 󰃟" -t 1000 -u low -h int:value:$brightness_percent -c "osd" --hint=string:x-dunst-stack-tag:osd
+echo -n "$icon $brightness_percent%" && notify-send " 󰃟" -t 1000 -u low -h int:value:$brightness_percent -c "osd" --hint=string:x-dunst-stack-tag:osd
