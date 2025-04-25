@@ -84,9 +84,11 @@ void getsigcmds(unsigned int signal)
 
 void setupsignals()
 {
-  for (unsigned int i = 0; i < LENGTH(blocks); i++) {
+  struct sigaction sa = {0};
+  sa.sa_handler = sighandler;
+	for (unsigned int i = 0; i < LENGTH(blocks); i++) {
 		if (blocks[i].signal > 0)
-			signal(SIGMINUS+blocks[i].signal, sighandler);
+			sigaction(SIGMINUS+blocks[i].signal, &sa, NULL);
 	}
 }
 
