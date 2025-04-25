@@ -1,0 +1,43 @@
+#!/bin/sh
+
+power_on() {
+  if bluetoothctl show | grep -q "Powered: yes"; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+device_connected() {
+  bluetoothctl info "$1" | grep -q "Connected: yes"
+}
+
+print_status() {
+  if power_on; then
+    printf '   󰂯'
+
+    paired_devices_cmd="devices Paired"
+
+    counter=0
+
+    bluetoothctl $paired_devices_cmd | grep Device | while read -r _ device _; do
+      if device_connected "$device"; then
+        device_alias=$(bluetoothctl info "$device" | grep "Alias" | cut -d ' ' -f 2-)
+
+        if [ "$counter" -gt 0 ]; then
+          printf ", %s" "$device_alias"
+        else
+          printf " %s" "$device_alias"
+        fi
+
+        counter=$((counter + 1))
+      fi
+    done
+
+    printf "\n"
+  else
+    echo ""
+  fi
+}
+
+print_status
