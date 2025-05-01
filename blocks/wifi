@@ -1,6 +1,6 @@
 #!/bin/sh
 
-strength=$(awk '/wlan0/ { print int(($3) * 100 / 70) }' /proc/net/wireless)
+strength=$(awk '/wlo1/ { print int(($3) * 100 / 70) }' /proc/net/wireless)
 
 if [ -n "$strength" ]; then
   if [ "$strength" -le 25 ]; then
